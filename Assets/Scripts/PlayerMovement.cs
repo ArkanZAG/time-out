@@ -2,21 +2,29 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D playerRigidBody;
-    [SerializeField] private float playerMovementSpeed;
+    [FormerlySerializedAs("playerRigidBody")] [SerializeField] private Transform playerTransform;
+    [SerializeField] private float maxBorderValue;
+    [SerializeField] private float minBorderValue;
+    [SerializeField] private float moveRange;
 
     private void Movement()
     {
-        playerRigidBody.transform.localPosition = new Vector2(
-            playerRigidBody.transform.localPosition.x * playerMovementSpeed, playerRigidBody.transform.localPosition.y);
+        if (Input.GetKeyDown(KeyCode.D) && transform.position.x < maxBorderValue)
+        {
+            playerTransform.position = new Vector2(playerTransform.position.x + moveRange, playerTransform.position.y);
+        }
+        else if (Input.GetKeyDown(KeyCode.A) && transform.position.x > minBorderValue)
+        {
+            playerTransform.position = new Vector2(playerTransform.position.x - moveRange, playerTransform.position.y);
+        }
     }
 
     private void Update()
     {
-        playerRigidBody.transform.localPosition = new Vector2(
-            playerRigidBody.transform.localPosition.x * playerMovementSpeed, playerRigidBody.transform.localPosition.y);
+        Movement();
     }
 }
