@@ -10,7 +10,7 @@ public class Movement : MonoBehaviour
     [FormerlySerializedAs("enemyTransform")] [SerializeField] private Transform moveTransform;
     [SerializeField] private float startSpeed;
     [SerializeField] private float endSpeed;
-    private Timer timer;
+    private UIController _uiController;
     
     private bool isMovingToPointB = true;
 
@@ -20,15 +20,15 @@ public class Movement : MonoBehaviour
     }
 
     //Function to Inject
-    public void Initialize(Timer newTimer)
+    public void Initialize(UIController newUIController)
     {
-        timer = newTimer;
+        _uiController = newUIController;
     }
 
     private void MoveTowardsPointB()
     {
         //Determine lerp speed base on limer progress
-        float speed = Mathf.Lerp(startSpeed, endSpeed, timer.GetNormalizedProgress());
+        float speed = Mathf.Lerp(startSpeed, endSpeed, _uiController.GetNormalizedProgress());
         moveTransform.position = new Vector2(moveTransform.position.x, moveTransform.position.y - Time.deltaTime * speed);
     }
 }

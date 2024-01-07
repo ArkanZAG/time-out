@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class EnemyDamage : MonoBehaviour
 {
-    private PointCounter pointCounter;
+    private Player player;
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag != "Player") return;
-        
-        pointCounter.ReduceScore(1);
+        Debug.Log("Point berkurang");
+        if (!col.gameObject.TryGetComponent(out PointCounter point)) return;
+        point.ReduceScore(1);
     }
 }

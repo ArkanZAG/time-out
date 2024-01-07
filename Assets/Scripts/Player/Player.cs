@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : MonoBehaviour
 {
     [FormerlySerializedAs("playerRigidBody")] [SerializeField] private Transform playerTransform;
     [SerializeField] private float maxBorderValue;

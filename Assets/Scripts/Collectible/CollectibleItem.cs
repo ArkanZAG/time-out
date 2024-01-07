@@ -6,12 +6,13 @@ using UnityEngine;
 public class CollectibleItem : MonoBehaviour
 {
     [SerializeField] private GameObject visual;
-    private PointCounter pointCounter;
+    
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag != "Player") return;
+        Debug.Log("Point bertambah");
+        if (!col.gameObject.TryGetComponent(out PointCounter point)) return;
         
-        pointCounter.AddScore(1);
+        point.AddScore(1);
         Destroy(visual);
     }
 }
